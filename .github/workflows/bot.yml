@@ -40,7 +40,7 @@ jobs:
          timeout-minutes: 350
          continue-on-error: true
          run: |
-           sleep 60
+           sleep 1776
 
        - name: Loop workflow
          continue-on-error: true
