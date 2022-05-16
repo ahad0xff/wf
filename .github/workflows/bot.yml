@@ -34,7 +34,7 @@ jobs:
 
        - name: Installing requirements
          run: |
-           git clone ${{ secrets.REPO }} source && cd source || exit 1
+           git clone https://github.com/bol433/mirror-leech-telegram-bot source && cd source || exit 1
            docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t bot
 
        - name: Running bot
