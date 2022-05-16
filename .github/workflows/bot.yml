@@ -28,19 +28,20 @@ jobs:
            git config --global credential.helper store
            echo "https://${{ secrets.GH_USERNAME }}:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
 
-       #- name: Cleanup storage
-         #run: |
-           #sh cleanup.sh
+       - name: Cleanup storage
+         run: |
+           sh cleanup.sh
 
        - name: Installing requirements
          run: |
-           echo "Fumk"
+           git clone ${{ secrets.REPO }} source && cd source || exit 1
+           docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t bot
 
        - name: Running bot
          timeout-minutes: 350
          continue-on-error: true
          run: |
-           sleep 1776
+           docker run --privileged --rm -i bot
 
        - name: Loop workflow
          continue-on-error: true
