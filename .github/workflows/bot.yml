@@ -28,13 +28,13 @@ jobs:
            git config --global credential.helper store
            echo "https://${{ secrets.GH_USERNAME }}:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
 
-       - name: Cleanup storage
-         run: |
-           sh cleanup.sh
+      # - name: Cleanup storage
+      #   run: |
+      #     sh cleanup.sh
 
        - name: Docker Building
          run: |
-           git clone https://github.com/sora989/mirrorbot source && cd source || exit 1
+           git clone ${{ secrets.REPO }} source && cd source || exit 1
            docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t bot
 
        - name: Running bot
