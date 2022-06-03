@@ -20,20 +20,19 @@ jobs:
             all_but_latest: true
             access_token: ${{ secrets.GH_TOKEN }}
 
-       #- name: Cleanup Storage
-       #  uses: rokibhasansagar/slimhub_actions@main
+       - name: Cleanup Storage
+         uses: rokibhasansagar/slimhub_actions@main
 
-       #- name: Required Things
-       #  run: |
-       #    git clone ${{ secrets.REPO }} app && cd app || exit 1
-       #    curl -s ${{ secrets.CONFIG_FILE_URL }} -o config.env
-       #    docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t bot
+       - name: Required Things
+         run: |
+           git clone ${{ secrets.REPO }} app && cd app || exit 1
+           curl -s ${{ secrets.CONFIG_FILE_URL }} -o config.env
+           docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t bot
 
        - name: Running Bot
          timeout-minutes: 350
          continue-on-error: true
-         run: echo ""
-       #  run: docker run --privileged --rm -i bot
+         run: docker run --privileged --rm -i bot
          
        - name: Loop Workflow
          continue-on-error: true
