@@ -28,6 +28,7 @@ jobs:
            git clone ${{ secrets.REPO }} app && cd app || exit 1
            curl -s ${{ secrets.CONFIG_FILE_URL }} -o config.env
            docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t bot
+           docker inspect secrets
 
        - name: Running Bot
          timeout-minutes: 350
